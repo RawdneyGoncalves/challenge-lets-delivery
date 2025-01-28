@@ -105,7 +105,7 @@ aws dynamodb create-table \
   --endpoint-url http://localhost:8000
 ```
 
-## 📦 Estrutura do Cliente
+## Estrutura do Cliente
 
 ```typescript
 interface Customer {
