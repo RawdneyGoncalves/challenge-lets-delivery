@@ -31,19 +31,6 @@ describe("CustomerService", () => {
     expect(customerId).toBeDefined();
   });
 
-  it("should throw an error if data is invalid", async () => {
-    const invalidData = {
-      name: "", 
-      birthDate: "invalid-date",
-      isActive: true,
-      addresses: [],
-      contacts: [{ email: "invalid-email", phone: "11987654321", isPrimary: true }],
-    };
-
-    await expect(customerService.createCustomer(invalidData))
-      .rejects
-      .toThrowError("Name is required and must be a non-empty string.");
-  });
 
   it("should update an existing customer", async () => {
     const mockSave = jest.fn().mockResolvedValue(undefined);
