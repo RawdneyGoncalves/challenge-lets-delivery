@@ -2,9 +2,44 @@
 
 Este projeto é uma API serverless para gerenciamento de clientes, implementada usando AWS Lambda, API Gateway e DynamoDB. A aplicação fornece operações CRUD completas para gerenciar informações de clientes.
 
+## Padrões Arquiteturais e de Design
+
+### Padrões Principais
+
+1. **Repository Pattern**
+   - Implementado através da classe `CustomerRepository`
+   - Abstrai a camada de persistência de dados
+   - Permite trocar facilmente a implementação do banco de dados
+   - Interface `ICustomerRepository` define o contrato
+
+2. **Factory Pattern**
+   - `CustomerFactory` encapsula a criação de objetos Customer
+   - Gera IDs únicos e valida os dados na criação
+   - Facilita a criação de objetos complexos
+
+3. **Service Layer Pattern**
+   - `CustomerService` implementa a lógica de negócios
+   - Atua como intermediário entre os handlers e o repository
+   - Encapsula regras de negócio e validações
+
+4. **Domain Model Pattern**
+   - Classe `Customer` como entidade rica com comportamentos
+   - Validações internas e regras de negócio encapsuladas
+   - Método `toggleActiveStatus()` como exemplo de comportamento
+
+5. **Error Handler Pattern**
+   - Classes customizadas de erro: `ValidationError`, `NotFoundError`, `ApplicationError`
+   - Tratamento centralizado de erros nos handlers
+   - Mapeamento de erros para status HTTP apropriados
+
+6. **Dependency Injection**
+   - Injeção do repository no service
+   - Facilita testes e manutenção
+   - Reduz acoplamento entre componentes
+
 ##  Tecnologias
 
-- Node.js (v22.x)
+- Node.js (v22)
 - TypeScript
 - AWS Lambda
 - Amazon DynamoDB
