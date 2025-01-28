@@ -16,11 +16,26 @@ export const createCustomer = async (
   context: Context,
   callback: Callback<APIGatewayProxyResult>
 ): Promise<APIGatewayProxyResult> => {
-  const result = await createCustomerHandler(event, context, callback);
-  return result ?? {
-    statusCode: 500,
-    body: JSON.stringify({ error: 'Unexpected error occurred in createCustomer' })
-  };
+  try {
+    console.log("Iniciando criação de cliente...");
+    const result = await createCustomerHandler(event, context, callback);
+    if (result) {
+      console.log("Cliente criado com sucesso");
+      return result;
+    } else {
+      console.log("Erro ao criar cliente.");
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Unexpected error occurred in createCustomer' })
+      };
+    }
+  } catch (error) {
+    console.error("Erro no handler de criação de cliente:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Unexpected error occurred in createCustomer' })
+    };
+  }
 };
 
 export const getCustomer = async (
@@ -28,11 +43,26 @@ export const getCustomer = async (
   context: Context,
   callback: Callback<APIGatewayProxyResult>
 ): Promise<APIGatewayProxyResult> => {
-  const result = await getCustomerHandler(event, context, callback);
-  return result ?? {
-    statusCode: 500,
-    body: JSON.stringify({ error: 'Unexpected error occurred in getCustomer' })
-  };
+  try {
+    console.log("Iniciando consulta de cliente...");
+    const result = await getCustomerHandler(event, context, callback);
+    if (result) {
+      console.log("Cliente consultado com sucesso");
+      return result;
+    } else {
+      console.log("Erro ao consultar cliente.");
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Unexpected error occurred in getCustomer' })
+      };
+    }
+  } catch (error) {
+    console.error("Erro no handler de consulta de cliente:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Unexpected error occurred in getCustomer' })
+    };
+  }
 };
 
 export const updateCustomer = async (
@@ -40,11 +70,26 @@ export const updateCustomer = async (
   context: Context,
   callback: Callback<APIGatewayProxyResult>
 ): Promise<APIGatewayProxyResult> => {
-  const result = await updateCustomerHandler(event, context, callback);
-  return result ?? {
-    statusCode: 500,
-    body: JSON.stringify({ error: 'Unexpected error occurred in updateCustomer' })
-  };
+  try {
+    console.log("Iniciando atualização de cliente...");
+    const result = await updateCustomerHandler(event, context, callback);
+    if (result) {
+      console.log("Cliente atualizado com sucesso");
+      return result;
+    } else {
+      console.log("Erro ao atualizar cliente.");
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Unexpected error occurred in updateCustomer' })
+      };
+    }
+  } catch (error) {
+    console.error("Erro no handler de atualização de cliente:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Unexpected error occurred in updateCustomer' })
+    };
+  }
 };
 
 export const deleteCustomer = async (
@@ -52,9 +97,24 @@ export const deleteCustomer = async (
   context: Context,
   callback: Callback<APIGatewayProxyResult>
 ): Promise<APIGatewayProxyResult> => {
-  const result = await deleteCustomerHandler(event, context, callback);
-  return result ?? {
-    statusCode: 500,
-    body: JSON.stringify({ error: 'Unexpected error occurred in deleteCustomer' })
-  };
+  try {
+    console.log("Iniciando exclusão de cliente...");
+    const result = await deleteCustomerHandler(event, context, callback);
+    if (result) {
+      console.log("Cliente excluído com sucesso");
+      return result;
+    } else {
+      console.log("Erro ao excluir cliente.");
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Unexpected error occurred in deleteCustomer' })
+      };
+    }
+  } catch (error) {
+    console.error("Erro no handler de exclusão de cliente:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Unexpected error occurred in deleteCustomer' })
+    };
+  }
 };
