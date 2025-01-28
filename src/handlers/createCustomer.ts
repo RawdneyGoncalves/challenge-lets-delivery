@@ -1,6 +1,7 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { CustomerService } from "../services/CustomerService";
 import { CustomerRepository } from "../repositories/CustomerRepository";
+import { ValidationError, ApplicationError } from "../utils/errors";
 
 const service = new CustomerService(new CustomerRepository());
 
@@ -21,9 +22,24 @@ export const handler: APIGatewayProxyHandler = async (event) => {
       body: JSON.stringify({ message: "Customer created", id }),
     };
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: error.message }),
+      };
+    }
+    
+    if (error instanceof ApplicationError) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: error.message }),
+      };
+    }
+
+    console.error('Unexpected error:', error);
     return {
-      statusCode: 400,
-      body: JSON.stringify({ error: error.message }),
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
